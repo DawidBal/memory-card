@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "Scooby";
+  src: local("scoobydoo"), url(./fonts/scoobydoo.ttf) format("truetype");
+}
+
+html {
+  font-family: Scooby;
+}
