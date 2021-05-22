@@ -54,6 +54,7 @@ function App() {
     });
     setCharacters(newCharacters);
     setGameLost(false);
+    setGameWon(false);
     setScoreBoard(0);
   }
 
@@ -64,10 +65,12 @@ function App() {
         <Scoreboard scoreBoard={scoreBoard} highestScore={highestScore} />
         <CardList scoreBoard={scoreBoard} setScoreBoard={setScoreBoard} 
         highestScore={highestScore} setHighestScore={setHighestScore} 
-        setGameLost={setGameLost} characters={characters} setCharacters={setCharacters}/>
+        setGameLost={setGameLost} characters={characters} 
+          setCharacters={setCharacters} gameWon={gameWon} setGameWon={setGameWon}/>
       </main>
-      {gameLost ? <Restart reset={reset} /> : null}
-      {gameLost ? <Overlay /> : null}
+      {gameLost ? <Restart reset={reset} title={"😲 Whoops, you lost! 😲"} /> : null}
+      {gameLost || gameWon ? <Overlay /> : null}
+      {gameWon ? <Restart reset={reset} title={"👍🏻🎉 Congratulations! You won! 🎉👍🏻"}/> : null}
 
     </div>
   );

@@ -46,11 +46,11 @@ const Text = styled.p`
     padding: 0;
 `
 
-const Restart = ({reset}) => {
+const Restart = ({reset, title}) => {
     return (
         <Wrapper>
             <Container>
-                <Title>Whoops, you lost!</Title>
+                <Title>{title}</Title>
                 <Text>Do you want to restart?</Text>
                 <Button onClick={() => reset()}>
                     Restart

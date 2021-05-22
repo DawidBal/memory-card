@@ -24,9 +24,8 @@ const CardDescription = styled.p`
 `
 
 
-const CardList = ({ scoreBoard, setScoreBoard, highestScore, setHighestScore, characters, setCharacters, setGameLost } ) => {
+const CardList = ({ scoreBoard, setScoreBoard, highestScore, setHighestScore, characters, setCharacters, setGameLost, gameWon, setGameWon } ) => {
 
-    console.log({characters});
     const shuffleCharacters = () => {
         const shuffledCharacters = [...characters];
         for (let i = shuffledCharacters.length - 1; i > 0; i--) {
@@ -53,6 +52,10 @@ const CardList = ({ scoreBoard, setScoreBoard, highestScore, setHighestScore, ch
         shuffleCharacters();
         if (scoreBoard > highestScore) {
             setHighestScore(scoreBoard);
+        }
+
+        if (scoreBoard >= characters.length) {
+            setGameWon(true);
         }
     }, [scoreBoard])
 
