@@ -19,7 +19,7 @@ const CardImage = styled.img`
 const CardDescription = styled.p`
     position:relative;
     margin: 1rem 0 0 0;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 800;
 `
 
