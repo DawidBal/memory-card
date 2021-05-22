@@ -23,15 +23,16 @@ const Title = styled.h1`
 `
 const Paragraph = styled.p`
     margin: 1rem 0 0 0;
-    font-size: 2rem;
+    font-size: ${props => props.small ? '1rem' : '2rem'};
     font-weight: 600;
 `
 
 const header = () => {
     return (
         <Header>
-                <Title>The Wolf Among Us</Title>
+            <Title>The Wolf Among Us</Title>
             <Paragraph>Memory Game</Paragraph>
+            <Paragraph small>How to play: Click on every character only once, if you click twice you lose!</Paragraph>
         </Header>
     )
 }
