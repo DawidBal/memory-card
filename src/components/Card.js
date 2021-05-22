@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const CardWrapper = styled.div`
+const CardWrapper = styled.button`
     flex: 0 1 200px;
     display: flex;
     flex-direction: column;
@@ -11,9 +11,13 @@ const CardWrapper = styled.div`
     border-radius: 10px;
     color: white;
     cursor: pointer;
+    border: transparent;
     transition: transform 0.3s ease;
     &:hover {
         transform: scale(1.1);
+    }
+    &:focus {
+        outline: 2px dotted white;
     }
 `
 
