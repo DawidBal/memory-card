@@ -1,8 +1,15 @@
-@font-face {
-  font-family: "Scooby";
-  src: local("scoobydoo"), url(./fonts/scoobydoo.ttf) format("truetype");
+html {
+  font-family: "Noto Sans JP", sans-serif;
 }
 
-html {
-  font-family: Scooby;
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 20%, rgba(91, 25, 86, 1) 100%);
+  color: #fff;
 }
