@@ -1,48 +1,68 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Card from './Card'
 
 const CardGrid = styled.section`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
     margin: 2rem;
 `
 
 const CardImage = styled.img`
-object-fit: cover;
-max-width: 100%;
+    object-fit: cover;
+    max-width: 100%;
+    flex: 1;
+`
+
+const CardDescription = styled.p`
+    position:relative;
+    margin: 1rem 0 0 0;
+    font-size: 1.4rem;
+    font-weight: 800;
 `
 
 
-const CardList = ( { scoreBoard, setScoreBoard} ) => {
-    const charactersData = [
-        { id: 1, name: "Bigby Wolf", image: './images/bigby.webp', clicked: false },
-        { id: 2, name: "Snow White", image: './images/snow-white.webp', clicked: false },
-        { id: 3, name: "Bluebeard", image: './images/bluebeard.webp', clicked: false },
-        { id: 4, name: "Bufkin", image: './images/bufkin.webp', clicked: false },
-        { id: 5, name: "Colin", image: './images/colin.webp', clicked: false },
-        { id: 6, name: "Ichabod Crane", image: './images/crane.webp', clicked: false },
-        { id: 7, name: "Crooked Man", image: './images/Crooked_Man.webp', clicked: false },
-        { id: 8, name: "Faith", image: './images/Faith.webp', clicked: false },
-        { id: 9, name: "Flycatcher", image: './images/flycatcher.webp', clicked: false },
-        { id: 10, name: "Aunty Greenleaf", image: './images/greenleaf.webp', clicked: false },
-        { id: 11, name: "Holly", image: './images/holly.webp', clicked: false },
-        { id: 12, name: "Jack Horner", image: './images/jack.webp', clicked: false },
-        { id: 13, name: "Bloody Mary", image: './images/mary.webp', clicked: false },
-        { id: 14, name: "Nerissa", image: './images/nerissa.webp', clicked: false },
-        { id: 14, name: "Mr. Toad", image: './images/toad.webp', clicked: false },
-    ]
+const CardList = ({ scoreBoard, setScoreBoard, highestScore, setHighestScore, characters, setCharacters, setGameLost } ) => {
 
-    const [characters, setCharacters] = useState(charactersData);
+    console.log({characters});
+    const shuffleCharacters = () => {
+        const shuffledCharacters = [...characters];
+        for (let i = shuffledCharacters.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [shuffledCharacters[i], shuffledCharacters[j]] = [shuffledCharacters[j], shuffledCharacters[i]];
+        }
+        setCharacters(shuffledCharacters);  
+    }
+
+    const handleClick = (id) => {
+        const newCharacters = [...characters];
+        const index = newCharacters.findIndex(value => value.id === id);
+        
+        if (!newCharacters[index].clicked === true) {
+            newCharacters[index].clicked = true;
+            setScoreBoard(scoreBoard + 1);
+        } else {
+            setGameLost(true);
+        }
+        setCharacters(newCharacters);
+    }
+
+    useEffect(() => {
+        shuffleCharacters();
+        if (scoreBoard > highestScore) {
+            setHighestScore(scoreBoard);
+        }
+    }, [scoreBoard])
+
     return (
         <CardGrid>
             {characters.map(character => 
-            <Card key={character.key}>
+                <Card key={character.id} id={character.id} handleClick={handleClick}>
                     <CardImage src={character.image} alt="" />
-                <p>{character.name}</p>
-            </Card>)}
+                    <CardDescription>{character.name}</CardDescription>
+                </Card>)}
         </CardGrid>
     )
 }
